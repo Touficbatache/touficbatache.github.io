@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <body>
+	Link / URL : <input type="text" id="myText" placeholder="http://www.example.com/">
+
+	<p>Enter the link or URL that you want to download then click on "Download" to download it. DON'T FORGET TO ADD HTTP OR HTTPS FIRST.</p>
+
+	<a id="demo" download><button onclick="myFunction()">Download</button></a>
+<script>
+function myFunction() {
+var x = document.getElementById("myText").value;
+// var thehttp = "http://";
+// var res = thehttp.concat(x);
+var a = document.getElementById('demo');
+
+// a.href = res;
+a.href = x;
+}
+</script>
+
+  </body>
+</html>
