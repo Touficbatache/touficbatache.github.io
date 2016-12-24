@@ -1,0 +1,4 @@
+var things = ['Listen to your favorite song!', 'Eat a fruit or something you like!', 'Sing!', 'Dance!', 'Go jogging near your house!', 'Call your best friend!', 'Do the thing you like!', 'Play a game on your phone!', 'Go check your timeline on Facebook, Twitter, Instagram...!', 'Play sudoku!', 'Play crosswords!', 'Work on a painting!', 'Read a book!', 'Watch a movie!', 'Go rent a DVD!', 'Chew a gum!', 'Go exercice!', 'Do some Yoga!', 'Bake a cake!', 'Tell your friends that you did not smoke a cigarette!', 'Save some money to buy your favorite shirt!', 'Take a walk!', 'Go swimming!', 'Write your diaries!', 'Prepare a fresh juice!', 'Go shopping!', 'Play Tic Tac Toe!', 'Play Truth or Dare with your friend or download an app to play with you!', 'Play X-O!', 'Go on the Play/App store and see what apps are in the Top FREE!', 'Get a cool photo editor and edit some of your photos!', 'Go to a cafe!'];
+var thing = things[Math.floor(Math.random()*things.length)];
+
+

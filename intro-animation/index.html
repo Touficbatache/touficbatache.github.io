@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Toufic - Intro Animation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/sanitize.css/2.0.0/sanitize.min.css'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Lato:300'>
+
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+
+     <section id="intro" class="section section--intro">
+  <!-- mousemove event layer (for background effect) -->
+  <div class="mouse-tracker-layer"></div>
+
+  <div class="square-dark-wrapper">
+    <div class="square-dark"></div>
+  </div>
+
+  <div class="pango-logo-group">
+    <!-- Outer logo outline animation -->
+    <svg class="outer-logo-circle" viewBox="0 0 700 700">
+      <circle class="circle" fill="none" cx="350" cy="350" r="330"/>
+    </svg>
+
+    <!-- Toufic JPG logo -->
+    <img src="img/logo.jpg" class="pango-logo">
+    <div class="square-wrapper">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <div class="sparks">
+      <svg class="spark" viewBox="91 -1 94 94" xmlns="http://www.w3.org/2000/svg">
+        <path d="M184 92c0-50.8-41.2-92-92-92" stroke="#f0f0f0" fill="none"/>
+      </svg>
+      <svg class="spark" viewBox="91 -1 94 94" xmlns="http://www.w3.org/2000/svg">
+        <path d="M184 92c0-50.8-41.2-92-92-92" stroke="#f0f0f0" fill="none"/>
+      </svg>
+    </div>
+  </div>
+
+  <h1 class="pango-words">
+    <span class="pango-word">TOUFIC</span>
+    <div class="line-separator"></div>
+    <span class="pango-word">BATACHE</span>
+  </h1>
+
+  <div class="bg-lines-wrapper"></div>
+</section>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+    
+  </body>
+</html>
