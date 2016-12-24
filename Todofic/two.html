@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <body>
+
+	First Name: <input type="text" id="myText" value="Mickey">
+
+	<p>Click the button to display the value of the value attribute of the text field.</p>
+
+	<button onclick="myFunction()">Generate download link...</button>
+<br>
+	<a id="demo" download>Click me to download your file!</a>
+
+<script>
+function myFunction() {
+var x = document.getElementById("myText").value;
+// var thehttp = "http://";
+// var res = thehttp.concat(x);
+var a = document.getElementById('demo');
+
+// a.href = res;
+a.href = x;
+}
+</script>
+
+  </body>
+</html>
+
+

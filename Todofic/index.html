@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TaskManager">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#2196f3">
+    <title>Todofic</title>
+    <link rel="stylesheet" href="css/framework7.material.css">
+    <link rel="stylesheet" href="css/framework7.material.colors.css">
+	<link rel="stylesheet" href="css/my-app.css">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
+	<link href="css/google-icons/material-icons.css" rel="stylesheet">
+    <link rel="icon" href="img/icon.png">
+  </head>
+  <body ng-controller="taskController" ng-cloak>
+	<div class="statusbar-overlay"></div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-left panel-cover">
+      <div class="view navbar-fixed">
+        <div class="pages">
+          <div data-page="panel-left" class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="center">Menu</div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="content-block-title">Todofic</div>
+              <div class="list-block">
+                <ul>
+                  <li>
+			        <a href="color-themes.html" class="item-link close-panel">
+                      <div class="item-content">
+                        <div class="item-media"><i class="material-icons cstm">settings</i></div>
+                        <div class="item-inner">
+                          <div class="menu-item-style">Settings</div>
+                        </div>
+                      </div>
+					 </a>
+				   </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="views">
+      <div class="view view-main">
+        <div class="pages navbar-fixed">
+          <div data-page="index" class="page">
+            <div class="navbar">
+			  <div class="navbar-inner">
+				<div class="left"><a class="open-panel link icon-only open-panel"><i class="icon icon-bars"></i></a></div>
+				<div class="center">Todofic</div>
+				<div class="right"><a class="link" onclick="window.location.reload()"><i class="icon ks-icon-refresh"></i></a><a class="open-popover link" data-popover=".popover-links"><i class="icon ks-icon-more"></i></a></div>
+			  </div>
+			</div>
+			<a class="floating-button open-popup" data-popup=".popup-about"><i class="icon icon-plus"></i></a>
+            <div class="page-content hide-bars-on-scroll">
+              <div class="content-block-title" ng-hide="!taskItem.length">Your tasks</div>
+			  <div class="list-block media-list" ng-hide="!taskItem.length">
+				<ul class="item-task">
+				  <li ng-repeat="taskItem in taskItem track by $index" ng-model="taskItem">
+					<label class="label-checkbox item-content no-fastclick">
+					  <input type="checkbox" name="ks-media-checkbox" ng-model="taskItem.complete" ng-change="save()"/>
+					  <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+					  <div class="item-inner">
+						<div class="item-title-row">
+						  <div class="item-title complete-{{taskItem.complete}}">{{taskItem.description}}</div>
+						  <div class="item-after category-{{taskItem.category}}">{{taskItem.category}}&nbsp;<span><div class="color-update"><i class="material-icons md-12 color-update">fiber_manual_record</i></div></span></div>
+						</div>
+						<div class="item-subtitle complete-{{taskItem.complete}} duedate">{{taskItem.date | date : 'd MMM y HH:mm'}}</div>
+					  </div>
+					</label>
+				  </li>
+			    </ul>
+              </div>
+			  <div class="content-block" ng-hide="!taskItem.length">
+				<p class="buttons-row"><a class="button button-big color-red" ng-click="deleteTask()">Delete task(s)</a></p>
+				</div>
+			  <div ng-show="!taskItem.length" class="cantarad"><p><i class="material-icons no-task-face">insert_emoticon</i><br><span class="line-1">You don't have any task!</span><br>Relax and enjoy your day.</p></div>
+		    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popover popover-links">
+	  <div class="popover-angle"></div>
+	  <div class="popover-inner">
+		<div class="list-block">
+		  <ul>
+			<li><a ng-click="selectAll()" class="list-button item-link" ng-hide="!taskItem.length">Select all</a></li>
+			<li><a ng-click="clearAll()" class="list-button item-link" ng-hide="!taskItem.length">Clear all</a></li>
+			<li><a href="help.html" class="list-button item-link">Help</a></li>
+			<li><a href="about.html" class="list-button item-link">About</a></li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+	<div class="popup popup-about">
+	  <div class="view">
+		<div class="page navbar-fixed">
+          <div data-page="index" class="page">
+			<div class="navbar">
+			  <div class="navbar-inner">
+				<div class="left"><a class="close-popup link"><i class="icon icon-back"></i></a></div>
+		    	<div class="center">Todofic</div>
+				<div class="right"><a class="link close-popup" ng-click="addNew()"><i class="material-icons">send</i></a></div>
+			  </div>
+			</div>
+			<div class="page-content">
+			  <div class="page-content login-screen-content">
+				<div class="login-screen-title" style="font-weight: 300;">New task</div>
+				<form>
+				  <div class="list-block inputs-list">
+					<ul>
+					  <li class="item-content">
+						<div class="item-inner">
+						  <div class="item-title label">Description</div>
+						  <div class="item-input">
+							<input type="text" name="task" id="description" placeholder="What do you need to do?" ng-model="newTask" class="inputs">
+						  </div>
+						</div>
+					  </li>
+					  <div class="row no-gutter">
+						<li class="item-content col-50">
+						  <div class="item-inner">
+							<div class="item-title label">Category</div>
+							<div class="item-input">
+							  <input type="text" name="category" id="category" placeholder="Type a category..." ng-model="newTaskCategory" class="inputs">
+							</div>
+						  </div>
+						</li>
+						<li class="item-content col-50">
+						  <div class="item-inner">
+							<div class="item-title label">Due date and time</div>
+							<div class="item-input">
+							  <input type="datetime-local" name="dueDate" placeholder="Select a date and time..." ng-model="newTaskDate" class="inputs" id="date" value="{{ today }}">
+							</div>
+						  </div>
+						</li>
+					  </div>
+					</ul>
+				  </div>
+				</form>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+    <script type="text/javascript" src="js/framework7.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/admob.js"></script>
+<script>
+        //Define angular app
+var app = angular.module('TaskManager', []); 
+
+//controllers
+app.controller('taskController', function($scope) {
+    $scope.today = new Date();
+    $scope.saved = localStorage.getItem('taskItems');
+    $scope.taskItem = (localStorage.getItem('taskItems')!==null) ? 
+    JSON.parse($scope.saved) : [ {description: "Why not add a task?", date: $scope.today, complete: false, category: "Category"}];
+    localStorage.setItem('taskItems', JSON.stringify($scope.taskItem));
+    
+    $scope.newTask = null;
+    $scope.newTaskDate = null;
+    $scope.newTaskCategory = null;
+    $scope.addNew = function () {
+        if (($scope.newTaskCategory == null || $scope.newTaskCategory == '') && ($scope.newTaskDate == null || $scope.newTaskDate == '') && ($scope.newTask == null || $scope.newTask == '')) {
+            $scope.taskItem.push({
+                description: "No task",
+                date: "No deadline",
+                complete: false,
+                category: "No category"
+            }); 
+        } else if (($scope.newTaskCategory == null || $scope.newTaskCategory == '') && ($scope.newTaskDate == null || $scope.newTaskDate == '')) {
+            $scope.taskItem.push({
+                description: $scope.newTask,
+                date: "No deadline",
+                complete: false,
+                category: "No category"
+            }); 
+        } else if (($scope.newTaskDate == null || $scope.newTaskDate == '') && ($scope.newTaskCategory != null || $scope.newTaskCategory != '') && ($scope.newTask == null || $scope.newTask == '')) {
+            $scope.taskItem.push({
+                description: "No task",
+                date: "No deadline",
+                complete: false,
+                category: $scope.newTaskCategory
+            }); 
+        } else if (($scope.newTaskDate == null || $scope.newTaskDate == '') && ($scope.newTaskCategory != null || $scope.newTaskCategory != '')) {
+            $scope.taskItem.push({
+                description: $scope.newTask,
+                date: "No deadline",
+                complete: false,
+                category: $scope.newTaskCategory
+            }); 
+        } else if (($scope.newTaskCategory == null || $scope.newTaskCategory == '') && ($scope.newTaskDate != null || $scope.newTaskDate != '') && ($scope.newTask == null || $scope.newTask == '')) {
+            $scope.taskItem.push({
+                description: "No task",
+                date: $scope.newTaskDate,
+                complete: false,
+                category: "No category"
+            }); 
+        } else if (($scope.newTaskCategory == null || $scope.newTaskCategory == '') && ($scope.newTaskDate != null || $scope.newTaskDate != '')) {
+            $scope.taskItem.push({
+                description: $scope.newTask,
+                date: $scope.newTaskDate,
+                complete: false,
+                category: "No category"
+            }); 
+        } else if (($scope.newTask != null || $scope.newTask != '') && ($scope.newTaskCategory != null || $scope.newTaskCategory != '') && ($scope.newTaskDate != null || $scope.newTaskDate != '')) {
+            $scope.taskItem.push({
+                description: $scope.newTask,
+                date: $scope.newTaskDate,
+                complete: false,
+                category: $scope.newTaskCategory
+            });
+        };
+        $scope.newTask = '';
+        $scope.newTaskDate = '';
+        $scope.newTaskCategory = '';
+        localStorage.setItem('taskItems', JSON.stringify($scope.taskItem));
+    };
+    $scope.deleteTask = function () {
+        var completedTask = $scope.taskItem;
+        $scope.taskItem = [];
+        angular.forEach(completedTask, function (taskItem) {
+            if (!taskItem.complete) {
+                $scope.taskItem.push(taskItem);
+            }
+        });
+        localStorage.setItem('taskItems', JSON.stringify($scope.taskItem));
+    };
+    
+    $scope.save = function () {
+        localStorage.setItem('taskItems', JSON.stringify($scope.taskItem));
+    };
+	
+	$scope.selectAll = function () {
+    $scope.select = true;
+    angular.forEach($scope.taskItem, function (obj) {
+        obj.complete = true;
+    });
+  };
+
+  $scope.clearAll = function () {
+    $scope.select = false;
+    angular.forEach($scope.taskItem, function (obj) {
+        obj.complete = false;
+    });
+  };
+});
+</script>
+<script>
+       $('.inputs').keydown(function (e) {
+         if (e.which === 13) {
+             var index = $('.inputs').index(this) + 1;
+             $('.inputs').eq(index).focus();
+         }
+     });
+</script>
+  </body>
+</html>
